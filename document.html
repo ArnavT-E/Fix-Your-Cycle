@@ -1,0 +1,535 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ SEO Title -->
+  <title>Bike Fix Finder | Cycle Repair Tips & DIY Bike Maintenance Guide</title>
+
+  <!-- ✅ Meta Description -->
+  <meta name="description" content="Bike Fix Finder helps you quickly search and solve common bicycle problems like loose chains, flat tires, or brake issues with easy DIY guides.">
+
+  <!-- ✅ Meta Keywords (not very powerful today but still okay to add) -->
+  <meta name="keywords" content="bike repair, cycle fix, DIY bike maintenance, bicycle chain problem, cycle brake issues, gear problems">
+
+  <!-- ✅ Author -->
+  <meta name="author" content="Bike Fix Finder Team">
+
+  <!-- ✅ Social Media Preview (Open Graph) -->
+  <meta property="og:title" content="Bike Fix Finder | Cycle Repair Tips & DIY Bike Maintenance Guide" />
+  <meta property="og:description" content="Search common bicycle problems and get instant DIY fixes for chains, brakes, gears, and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+  <meta property="og:image" content="https://yourwebsite.com/bike-preview.jpg" />
+
+  <!-- Favicon -->
+<link rel="icon" type="image/png" href="Favicon.png.png" />
+
+
+  <!-- ✅ Tailwind + Framer Motion -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+
+  <meta name="description" content="Search a bike problem and get a step‑by‑step fix." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: 245 245 250;          /* base background */
+      --card: 255 255 255;        /* card */
+      --ink: 20 24 35;            /* text */
+      --muted: 105 115 140;       /* secondary text */
+      --brand: 76 110 245;        /* primary */
+      --brand-2: 95 220 180;      /* accent */
+      --ring: 76 110 245;         /* focus ring */
+      --shadow: 20 25 40;         /* shadow color */
+      --ok: 16 185 129;           /* green */
+      --warn: 245 158 11;         /* yellow */
+      --danger: 239 68 68;        /* red */
+    }
+    [data-theme="dark"]{
+      --bg: 14 16 22;
+      --card: 20 22 30;
+      --ink: 236 241 255;
+      --muted: 150 160 185;
+      --brand: 114 137 255;
+      --brand-2: 75 201 171;
+      --ring: 140 160 255;
+      --shadow: 0 0 0;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      color: rgb(var(--ink)); background: radial-gradient(1200px 800px at 80% -10%, rgba(var(--brand),0.15), transparent 50%),
+                radial-gradient(1200px 800px at -10% 120%, rgba(var(--brand-2),0.15), transparent 50%),
+                rgb(var(--bg));
+      display:flex; flex-direction:column; min-height:100vh;
+    }
+    .container{width:min(1100px, 94%); margin:0 auto;}/* Header */
+header{position:sticky; top:0; backdrop-filter:saturate(1.1) blur(10px); background:linear-gradient(180deg, rgba(var(--bg),0.9), rgba(var(--bg),0.6)); border-bottom:1px solid rgba(120,130,160,0.12); z-index:20}
+.nav{display:flex; align-items:center; gap:14px; padding:14px 0}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:-0.3px}
+.logo svg{width:28px; height:28px; filter:drop-shadow(0 4px 10px rgba(var(--brand),.35))}
+.pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid rgba(120,130,160,0.15); border-radius:999px; font-size:12px; color:rgb(var(--muted))}
+.theme-toggle{margin-left:auto; display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px; border:1px solid rgba(120,130,160,0.15); cursor:pointer; background:rgba(var(--card),0.7)}
+
+/* Hero */
+.hero{display:grid; grid-template-columns:1.2fr .8fr; gap:24px; padding:34px 0 20px}
+@media (max-width: 900px){ .hero{grid-template-columns:1fr; gap:18px} }
+.card{background:rgba(var(--card),0.8); border:1px solid rgba(120,130,160,0.15); border-radius:20px; box-shadow:0 10px 40px -20px rgba(var(--shadow), .6)}
+.hero .card{padding:18px}
+.title{font-weight:800; font-size: clamp(22px, 6vw, 40px); letter-spacing:-0.6px; margin:6px 0 8px}
+.subtitle{color:rgb(var(--muted)); margin:0 0 16px}
+
+/* Search */
+.search{display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.7); border:1px solid rgba(120,130,160,0.2); padding:10px 12px; border-radius:16px}
+[data-theme="dark"] .search{background:rgba(0,0,0,0.25)}
+.search input{flex:1; font:inherit; border:none; outline:none; background:transparent; color:rgb(var(--ink)); padding:6px}
+.search button{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:none; cursor:pointer; color:white; background:linear-gradient(135deg, rgb(var(--brand)), rgb(var(--brand-2))); box-shadow:0 8px 24px -10px rgba(76,110,245,.5)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(120,130,160,0.2); background:rgba(var(--card),0.7); cursor:pointer}
+
+/* Results grid */
+.results{display:grid; grid-template-columns: repeat(12, 1fr); gap:16px; padding:8px 0 34px}
+.result{grid-column: span 12; padding:16px; overflow:hidden; position:relative}
+@media (min-width: 640px){ .result{grid-column: span 6} }
+@media (min-width: 1000px){ .result{grid-column: span 4} }
+.result h3{margin:4px 0 8px; font-size:18px}
+.tagline{display:flex; gap:8px; flex-wrap:wrap}
+.badge{font-size:11px; padding:4px 8px; border-radius:999px; background:rgba(76,110,245,.12); color:rgb(var(--brand)); border:1px solid rgba(76,110,245,.25)}
+.meta{display:flex; gap:10px; align-items:center; color:rgb(var(--muted)); font-size:12px; margin:8px 0}
+
+/* Accordion */
+details{border:1px dashed rgba(120,130,160,0.25); border-radius:14px; padding:10px 12px; background:rgba(var(--card),0.6)}
+summary{cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px; user-select:none}
+summary::-webkit-details-marker{display:none}
+.steps{margin:10px 0 0; padding-left:18px}
+.steps li{margin:8px 0}
+
+/* Floaty accent */
+.bubble{position:absolute; inset:auto -30% -30% auto; width:200px; height:200px; background:radial-gradient(circle at 30% 30%, rgba(var(--brand),.35), transparent 55%), radial-gradient(circle at 70% 60%, rgba(var(--brand-2),.35), transparent 60%); filter:blur(24px); opacity:.7; transform:rotate(8deg)}
+
+/* Footer */
+footer{color:rgb(var(--muted)); padding:26px 0 48px; text-align:center}
+
+/* Animations */
+@keyframes fadeSlideUp{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)}}
+.appear{animation:fadeSlideUp .6s ease both}
+.hover-raise{transition:transform .25s ease, box-shadow .25s ease}
+.hover-raise:hover{transform:translateY(-4px); box-shadow:0 18px 50px -24px rgba(76,110,245,.45)}
+.ring:focus{outline:3px solid rgba(var(--ring),.45); outline-offset:2px}
+
+/* Utility */
+.row{display:flex; gap:10px; align-items:center}
+.spacer{flex:1}
+.hidden{display:none !important}
+.divider{height:1px; background:linear-gradient(90deg, transparent, rgba(120,130,160,.2), transparent); margin:12px 0}
+.btn-sm{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px; border:1px solid rgba(120,130,160,.2); background:rgba(var(--card),0.7); cursor:pointer}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgb(var(--brand))" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3"/><circle cx="18.5" cy="17.5" r="3"/><path d="M5.5 17.5 9 10h5l4.5 7.5M10 10a3.5 3.5 0 1 1 0-7"/></svg>
+        <span>Bike Fix Finder</span>
+      </div>
+      <span class="pill">DIY fixes • step‑by‑step</span>
+      <button id="themeBtn" class="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+        <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+        <svg id="moon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="hide-sm">Theme</span>
+      </button>
+    </div>
+  </header>  <main class="container">
+    <section class="hero appear">
+      <div class="card hover-raise">
+        <h1 class="title">Fix your cycle like a pro</h1>
+        <p class="subtitle">Type a problem (e.g., <em>"chain falls off"</em>, <em>"flat tyre"</em>). We’ll show tools, causes, and step‑by‑step actions—fast.</p>
+        <form id="searchForm" class="search" autocomplete="off">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input class="ring" id="q" name="q" placeholder="Search a problem…" aria-label="Search a problem" />
+          <button type="submit"><span>Search</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </form>
+        <div class="chips" id="quickChips"></div>
+        <div class="divider"></div>
+        <div class="row">
+          <div class="pill">Tip: try "gears skipping" or "brake rubbing"</div>
+          <span class="spacer"></span>
+          <button id="copyLink" class="btn-sm" title="Copy results link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2" ry="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> Share</button>
+        </div>
+      </div>
+      <aside class="card hover-raise" style="padding:16px 16px 8px">
+        <h3 style="margin:4px 0 8px">Common quick fixes</h3>
+        <div class="chips" id="commonChips"></div>
+        <p class="subtitle" style="margin-top:10px">Select one to auto‑fill search.</p>
+        <div class="divider"></div>
+        <div class="row" style="justify-content:space-between;">
+          <span class="pill">Difficulty filter</span>
+          <div class="row" style="gap:8px">
+            <label class="chip"><input type="checkbox" id="fEasy" checked> easy</label>
+            <label class="chip"><input type="checkbox" id="fMed" checked> medium</label>
+            <label class="chip"><input type="checkbox" id="fAdv" checked> advanced</label>
+          </div>
+        </div>
+      </aside>
+    </section><section id="results" class="results appear"></section>
+
+<section class="card appear" style="padding:16px">
+  <div class="row">
+    <strong>Safety first:</strong>
+    <span class="spacer"></span>
+    <span class="badge">gloves</span>
+    <span class="badge">eye protection</span>
+    <span class="badge">check bolts twice</span>
+  </div>
+  <p class="subtitle" style="margin-top:6px">If you see cracked frames, badly bent parts, or you’re unsure—visit a bike shop.</p>
+</section>
+
+  </main>  <footer class="container">
+    <div>© <span id="year"></span> Bike Fix Finder • Built for quick DIY help</div>
+  </footer>  <script>
+    // --- Theme toggle ---
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    function setTheme(mode){
+      root.setAttribute('data-theme', mode);
+      localStorage.setItem('theme', mode);
+      document.getElementById('sun').classList.toggle('hidden', mode==='dark');
+      document.getElementById('moon').classList.toggle('hidden', mode!=='dark');
+    }
+    setTheme(localStorage.getItem('theme')||'dark');
+    themeBtn.addEventListener('click',()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'));
+
+    // --- Data ---
+    const DATA = [
+      {
+        id:'chain-drop',
+        title:'Chain keeps falling off gears',
+        tags:['chain','derailleur','gears','skipping','chainring','sprocket'],
+        severity:'easy',
+        estTime:'10–20 min',
+        tools:['Allen keys (4/5mm)','Phillips screwdriver','Chain lube','Clean rag'],
+        symptoms:['Chain pops off when shifting','Falls off chainring or rear cogs','Grinding noise while pedalling'],
+        causes:['Derailleur limit screws mis-set','Cable tension off (indexing)','Bent derailleur hanger','Worn or dry chain'],
+        steps:[
+          'Shift to smallest rear cog & front ring.',
+          'Turn rear derailleur barrel adjuster anti-clockwise in 1/4 turns to add cable tension until it shifts up cleanly.',
+          'Set limit screws: H stops overshift off small cog; L stops overshift off big cog. Turn 1/8 turns and test.',
+          'Sight from behind: derailleur cage should line up with cogs. If hanger looks bent, ride gently to a shop for hanger alignment.',
+          'Clean and lube chain. Replace if stretched/badly rusted.'
+        ],
+        whenToSeeShop:'If shifting never lines up or the hanger is bent — needs alignment tool.'
+      },
+      {
+        id:'puncture',
+        title:'Flat tyre / puncture',
+        tags:['tyre','tube','puncture','flat','leak'],
+        severity:'easy',
+        estTime:'15–25 min',
+        tools:['Tyre levers','Spare tube or patch kit','Pump'],
+        symptoms:['Soft tyre','Hissing sound','Nail/thorn in tread'],
+        causes:['Pinch flat','Glass/thorn','Worn rim tape'],
+        steps:[
+          'Remove wheel. Deflate fully and push beads to centre channel.',
+          'Use levers to remove one bead, pull out tube.',
+          'Inspect tyre inside & out; remove debris.',
+          'Lightly inflate new/patched tube, tuck bead evenly.',
+          'Inflate to sidewall PSI. Re-seat wheel.'
+        ],
+        whenToSeeShop:'Large sidewall cuts or damaged rim.'
+      },
+      {
+        id:'brake-rub',
+        title:'Brakes rubbing (rim/disc)',
+        tags:['brake','rub','disc','rim','alignment','caliper'],
+        severity:'easy',
+        estTime:'10–15 min',
+        tools:['Allen keys','Clean rag'],
+        symptoms:['Wheel slows quickly','Squeak each rotation'],
+        causes:['Misaligned caliper/pads','Bent rotor','Wheel not fully seated'],
+        steps:[
+          'Open QR or thru-axle, re-seat wheel fully, close firmly.',
+          'Rim brakes: loosen mount bolt, squeeze brake to centre, tighten.',
+          'Disc: loosen caliper bolts, squeeze lever & hold, tighten evenly.',
+          'Spin and fine‑tune with pad‑centering screws if present.'
+        ],
+        whenToSeeShop:'Badly bent rotor or worn-out pads you can’t replace.'
+      },
+      {
+        id:'gear-index',
+        title:'Gears won’t shift cleanly (indexing)',
+        tags:['gears','indexing','derailleur','cable','barrel adjuster','skip'],
+        severity:'easy',
+        estTime:'10–20 min',
+        tools:['2mm/3mm screwdriver','Allen keys'],
+        symptoms:['Multiple clicks per shift','Skips under load'],
+        causes:['Cable stretch','Dirty cables','B‑limit/limit off'],
+        steps:[
+          'If it hesitates to go to bigger cogs, turn barrel adjuster anti‑clockwise 1/4 turn; if to smaller, turn clockwise.',
+          'Adjust limit screws as needed (H for smallest, L for largest cog).',
+          'Set B‑limit so top jockey is ~5–6 mm from largest cog.'
+        ],
+        whenToSeeShop:'Frayed/corroded cables or housing replacement.'
+      },
+      {
+        id:'squeaky-chain',
+        title:'Squeaky / dry chain',
+        tags:['chain','noise','lube','maintenance','clean'],
+        severity:'easy',
+        estTime:'5–10 min',
+        tools:['Degreaser (optional)','Chain lube','Rag'],
+        symptoms:['Squeak while pedalling','Black dirty chain'],
+        causes:['Dry chain','Dust buildup'],
+        steps:[
+          'Backpedal while adding a drop of lube to each roller.',
+          'Backpedal 30–60 s to work in.',
+          'Wipe off excess so it doesn’t attract dirt.'
+        ],
+        whenToSeeShop:'Seized links that don’t free with lube (may need replacement).'
+      },
+      {
+        id:'loose-headset',
+        title:'Loose headset (wobbly handlebar)',
+        tags:['steerer','headset','play','loose','stem'],
+        severity:'easy',
+        estTime:'5–10 min',
+        tools:['5mm/4mm Allen keys'],
+        symptoms:['Clunk when braking','Bar shakes fore/aft'],
+        causes:['Top cap loose','Stem bolts loose'],
+        steps:[
+          'Loosen stem clamp bolts slightly.',
+          'Tighten top cap bolt slowly until play disappears (don’t overtighten).',
+          'Re‑tighten stem clamp bolts evenly while bars are straight.'
+        ],
+        whenToSeeShop:'Rough bearing feel even when correctly preloaded.'
+      },
+      {
+        id:'wheel-true',
+        title:'Wheel wobbles / out of true',
+        tags:['wheel','spokes','true','rim','wobble'],
+        severity:'medium',
+        estTime:'20–30 min',
+        tools:['Spoke key','Zip tie (as gauge)'],
+        symptoms:['Brake rubs at one spot','Side‑to‑side wobble'],
+        causes:['Loose spokes','Impact damage'],
+        steps:[
+          'Zip‑tie a pointer to frame/fork near rim as gauge.',
+          'Tighten spokes on the side the rim moves away from by 1/4 turns.',
+          'Work gradually; keep even tension.'
+        ],
+        whenToSeeShop:'Large dents or many loose/broken spokes.'
+      },
+      {
+        id:'hydraulic-bleed',
+        title:'Spongy hydraulic brakes',
+        tags:['brakes','hydraulic','bleed','spongy'],
+        severity:'advanced',
+        estTime:'30–45 min',
+        tools:['Bleed kit for your brand','Mineral oil/DOT as specified','Allen keys','Clean rag'],
+        symptoms:['Lever pulls to bar','Mushy feel'],
+        causes:['Air in system','Leaky fittings','Worn pads'],
+        steps:[
+          'Set bike level. Remove wheel & pad, insert bleed block.',
+          'Attach syringes/bottles per brand instructions. Push/pull fluid to remove bubbles.',
+          'Clean up, re‑fit pads & wheel. Bed in pads.'
+        ],
+        whenToSeeShop:'If you don’t have the correct bleed kit/fluid or there are leaks.'
+      }
+    ];
+
+    // --- Helpers ---
+    const $ = (q, el=document)=>el.querySelector(q);
+    const $$ = (q, el=document)=>Array.from(el.querySelectorAll(q));
+
+    // Normalize text for search
+    function norm(s){return (s||'').toLowerCase().normalize('NFKD').replace(/[^\w\s-]/g,'')}
+
+    // Render quick chips
+    const quick = [
+      'chain falls off','flat tyre','brake rubbing','gears skipping','squeaky chain','loose handlebar','wheel wobble','hydraulic brakes spongy'
+    ];
+    const quickWrap = $('#quickChips');
+    quick.forEach(t=>{
+      const b=document.createElement('button'); b.className='chip'; b.textContent=t; b.type='button'; b.addEventListener('click',()=>{ q.value=t; doSearch(); }); quickWrap.appendChild(b);
+    });
+
+    const commonWrap = $('#commonChips');
+    DATA.slice(0,6).forEach(item=>{
+      const b=document.createElement('button'); b.className='chip'; b.type='button'; b.textContent=item.title; b.addEventListener('click',()=>{ q.value=item.title; doSearch(); }); commonWrap.appendChild(b);
+    });
+
+    // Difficulty filters
+    const filters = { easy: true, medium: true, advanced: true };
+    $('#fEasy').addEventListener('change',e=>{filters.easy=e.target.checked; doSearch();});
+    $('#fMed').addEventListener('change',e=>{filters.medium=e.target.checked; doSearch();});
+    $('#fAdv').addEventListener('change',e=>{filters.advanced=e.target.checked; doSearch();});
+
+    // Search
+    const form = $('#searchForm');
+    const q = $('#q');
+    const results = $('#results');
+
+    function score(item, query){
+      if(!query) return 1; // show all by default
+      const hay = [item.title, ...item.tags, ...(item.symptoms||[]), ...(item.causes||[])].map(norm).join(' ');
+      const bits = norm(query).split(/\s+/).filter(Boolean);
+      let s = 0; bits.forEach(b=>{ if(hay.includes(b)) s+=1; });
+      // small boost for title startswith
+      if(norm(item.title).startsWith(norm(query))) s+=1.5;
+      return s;
+    }
+
+    function badgeFor(sev){
+      const map = {easy:['#10b98122','#10b981','#0b7d5f'], medium:['#f59e0b22','#f59e0b','#9a6407'], advanced:['#ef444422','#ef4444','#8a1a1a']};
+      const [bg,fg,border] = map[sev]||['#e5e7eb','#111827','#d1d5db'];
+      return `<span class="badge" style="background:${bg};color:${fg};border:1px solid ${border}">${sev}</span>`
+    }
+
+    function render(items){
+      results.innerHTML = '';
+      if(items.length===0){
+        results.innerHTML = `<div class="card result appear" style="grid-column:span 12; padding:24px; text-align:center">No matching fixes found. Try different words like <em>"tyre"</em> or <em>"derailleur"</em>.</div>`;
+        return;
+      }
+      items.forEach(item=>{
+        const card = document.createElement('article');
+        card.className = 'card result hover-raise appear';
+        card.innerHTML = `
+          <div class="bubble" aria-hidden="true"></div>
+          <div class="row" style="justify-content:space-between; align-items:flex-start">
+            <h3>${item.title}</h3>
+            <div class="tagline">${badgeFor(item.severity)} <span class="badge" title="Estimated time">${item.estTime||''}</span></div>
+          </div>
+          <div class="meta">
+            <span title="Tags">${item.tags.slice(0,4).map(t=>`#${t}`).join(' ')}</span>
+          </div>
+
+          <details>
+            <summary>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              <strong>Tools</strong>
+            </summary>
+            <ul class="steps">${(item.tools||[]).map(t=>`<li>${t}</li>`).join('')}</ul>
+          </details>
+
+          <div style="height:8px"></div>
+
+          <details open>
+            <summary>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              <strong>Step‑by‑step</strong>
+            </summary>
+            <ol class="steps">${(item.steps||[]).map(s=>`<li>${s}</li>`).join('')}</ol>
+          </details>
+
+          ${(item.symptoms?.length?`<details><summary><strong>Symptoms</strong></summary><ul class="steps">${item.symptoms.map(s=>`<li>${s}</li>`).join('')}</ul></details>`:'')}
+          ${(item.causes?.length?`<details><summary><strong>Likely causes</strong></summary><ul class="steps">${item.causes.map(s=>`<li>${s}</li>`).join('')}</ul></details>`:'')}
+
+          ${(item.whenToSeeShop?`<p class="subtitle" style="margin-top:10px"><strong>See a shop:</strong> ${item.whenToSeeShop}</p>`:'')}
+        `;
+        results.appendChild(card);
+      });
+    }
+
+    function doSearch(){
+      const query = q.value.trim();
+      const items = DATA
+        .filter(it=>filters[it.severity]!==false)
+        .map(it=>({it, s: score(it, query)}))
+        .filter(x=>x.s>0 || !query)
+        .sort((a,b)=>b.s-a.s)
+        .map(x=>x.it);
+      // update URL for sharing
+      const params = new URLSearchParams(window.location.search);
+      query ? params.set('q', query) : params.delete('q');
+      const active = Object.keys(filters).filter(k=>filters[k]).join(',');
+      params.set('sev', active);
+      history.replaceState(null,'', `${location.pathname}?${params.toString()}`);
+      render(items);
+    }
+
+    // Share link
+    document.getElementById('copyLink').addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(location.href); alert('Sharable link copied!'); }catch{ alert('Copy failed. You can copy the address bar URL.'); }
+    });
+
+    // Form submit
+    form.addEventListener('submit', e=>{ e.preventDefault(); doSearch(); });
+    q.addEventListener('input', ()=>{ doSearch(); });
+
+    // Read URL state
+    (function initFromURL(){
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('q')||''; q.value = query;
+      const sev = (params.get('sev')||'easy,medium,advanced').split(',');
+      $('#fEasy').checked = sev.includes('easy'); filters.easy = $('#fEasy').checked;
+      $('#fMed').checked = sev.includes('medium'); filters.medium = $('#fMed').checked;
+      $('#fAdv').checked = sev.includes('advanced'); filters.advanced = $('#fAdv').checked;
+    })();
+
+    // Initial render
+    doSearch();
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+const problems = [
+    {
+      keywords: ["chain falls", "chain keeps coming off", "chain slipping"],
+      solution: "Check if the chain is too loose or stretched. Adjust the derailleur or shorten/replace the chain. Make sure the gears are aligned."
+    },
+    {
+      keywords: ["squeaky chain", "dry chain", "noisy chain"],
+      solution: "Clean the chain thoroughly and apply lubricant. A dry or dirty chain often causes squeaking."
+    },
+    {
+      keywords: ["flat tire", "puncture", "air leaking"],
+      solution: "Check the inner tube for punctures. Patch the hole with a puncture repair kit or replace the tube. Inflate to the correct pressure."
+    },
+    {
+      keywords: ["gear not shifting", "gear stuck", "gear problem"],
+      solution: "Inspect the derailleur and shifter cable. Adjust cable tension using the barrel adjuster. If needed, fine-tune the derailleur limit screws."
+    },
+    {
+      keywords: ["brakes too loose", "brakes not applying", "brakes weak"],
+      solution: "Tighten the brake cable using the barrel adjuster or by loosening the cable clamp bolt, pulling the cable tighter, and re-clamping. If pads are worn, replace them."
+    },
+    {
+      keywords: ["mudguard came off", "mudguard loose", "mudguard broken"],
+      solution: "Reattach the mudguard using the screws or clips provided. If mounts are broken, use zip ties or replace the mudguard."
+    },
+    {
+      keywords: ["pedal came off", "pedal loose"],
+      solution: "Check the pedal threads. Screw the pedal back in tightly with a wrench (remember left pedal is reverse-threaded). If threads are damaged, the crank arm may need replacing."
+    }
+  ];
+
+  function searchProblem() {
+    const query = document.getElementById("searchInput").value.toLowerCase();
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
+
+    const found = problems.find(problem =>
+      problem.keywords.some(keyword => query.includes(keyword))
+    );
+
+    if (found) {
+      resultDiv.innerHTML = `<p class="text-lg font-semibold">${found.solution}</p>`;
+    } else {
+      resultDiv.innerHTML = `<p class="text-red-600">No fix found for that problem. Try another keyword.</p>`;
+    }
+  }
+</script>
+
+
+
+  
+
+
+</body>
+</html>
